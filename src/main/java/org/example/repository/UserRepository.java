@@ -11,7 +11,7 @@ public class UserRepository {
     // ska fixas full crud för user för VG
     public boolean saveUser(String username, String password, String role) {
         String sql = "Insert INTO users(username,password,role)VALUES (?,?,?)";
-        // commitar
+
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)){
