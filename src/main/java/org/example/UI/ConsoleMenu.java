@@ -1,6 +1,7 @@
 package org.example.UI;
 
 import org.example.service.AuthService;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Scanner;
 
@@ -34,8 +35,10 @@ public class ConsoleMenu {
         System.out.println("Enter your password");
         String password = scanner.nextLine();
 
-        boolean sucess = service.register(username,password);
-        if (sucess){
+        String hashedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
+
+        boolean success = service.register(username,hashedPassword);
+        if (success){
             System.out.println("User registrered sucessfully");
         }else{
             System.out.println("Username or password inccorect");
