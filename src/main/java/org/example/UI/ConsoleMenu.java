@@ -14,12 +14,15 @@ public class ConsoleMenu {
         while(running){
             System.out.println("Starting secure notes");
             System.out.println("1. Register user");
+            System.out.println("2. Register admin");
             System.out.println("2. Exit");
+
             String choice = scanner.nextLine();
 
             switch (choice){
                 case "1" -> register();
-                case "2" -> running = false;
+                case "2" -> registerAdmin();
+                case "3" -> running = false;
                 default -> System.out.println("Invalid choice");
             }
         }
@@ -38,6 +41,21 @@ public class ConsoleMenu {
         String hashedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
 
         boolean success = service.register(username,hashedPassword);
+        if (success){
+            System.out.println("User registrered sucessfully");
+        }else{
+            System.out.println("Username or password inccorect");
+        }
+    }
+    private void registerAdmin(){
+        System.out.println("Enter your username");
+        String username = scanner.nextLine();
+        System.out.println("Enter your password");
+        String password = scanner.nextLine();
+
+        String hashedPassword = BCrypt.hashpw(password,BCrypt.gensalt());
+
+        boolean success = service.registerAdmin(username,hashedPassword);
         if (success){
             System.out.println("User registrered sucessfully");
         }else{

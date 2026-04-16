@@ -13,6 +13,18 @@ public class AuthService {
             System.out.println("passwoerd is empty");
             return false;
         }
+        return repository.saveUser(username,password,"User");
+    }
+
+    public boolean registerAdmin(String username, String password){
+        if(username == null || username.isBlank()){
+            System.out.println("Username is empty");
+            return false;
+        }
+        if (password == null || password.isBlank()){
+            System.out.println("passwoerd is empty");
+            return false;
+        }
         return repository.saveUser(username,password,"Admin");
     }
 
